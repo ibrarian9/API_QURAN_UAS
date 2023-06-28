@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,31 +37,38 @@ public class DetailSurahActivity extends AppCompatActivity {
     Button btAudio;
     private MediaPlayer mediaPlayer;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_surah);
 
+        // Nomor Surah
         int id = getIntent().getIntExtra("id", 1);
         tvnoSurah = findViewById(R.id.tvNoSurah);
         tvnoSurah.setText(String.valueOf(id));
 
+        // Nama Surah
         String nameComplex = getIntent().getStringExtra("name");
         tvNameComplexSurah = findViewById(R.id.tvJudul);
         tvNameComplexSurah.setText((nameComplex));
 
+        // Nama Arab
         String namaArab = getIntent().getStringExtra("arabic");
         tvArabic = findViewById(R.id.tvNamaArab);
         tvArabic.setText("Nama Arab " + namaArab);
 
+        // Nama Temoat Surah Diturunkan
         String tempat = getIntent().getStringExtra("tempat");
         tvTempat = findViewById(R.id.tvTempat);
         tvTempat.setText("Tempat Diturunkan " + tempat);
 
+        // Jumlah Ayat
         int jumlahAyat = getIntent().getIntExtra("verses", 1);
         tvJumlahAyat = findViewById(R.id.tvJumlahAyat);
         tvJumlahAyat.setText("Jumlah Ayat " + jumlahAyat);
 
+        // Audio Surah
         mediaPlayer = new MediaPlayer();
         String audioUrl = getIntent().getStringExtra("audio_url");
         btAudio = findViewById(R.id.btAudio);
